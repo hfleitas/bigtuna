@@ -34,7 +34,7 @@ sqldb-goderich
 ![AllowForFabric.png](AllowForFabric.png "Allow for Fabric")
 
 
-### Try breaking it.
+### 🐟 Try breaking it
 
 1. Run on sql-goderich
 ```
@@ -48,3 +48,5 @@ select * from cdc.SalesLT_Customer_CT
 | where CustomerID == 30121
 | summarize arg_max(CustomerID,*)
 ```
+
+![bluefin tuna](https://en.wikipedia.org/wiki/Atlantic_bluefin_tuna#/media/File:Large_bluefin_tuna_on_deck.jpg "bluefin tuna")
