@@ -6,7 +6,11 @@ select name, is_cdc_enabled from sys.databases
 select * from SalesLT.Customer --847 rows
 
 exec sys.sp_cdc_enable_db --system tables created along cdc schema
-exec sys.sp_cdc_enable_table @source_schema = 'SalesLT', @source_name = 'Customer', @role_name=NULL --must be enabled on the db first!
+exec sys.sp_cdc_enable_table --must be enabled on the db first!
+    @source_schema = 'SalesLT',
+    @source_name = 'Customer',
+    @role_name=NULL --control access to change data.
+;
 
 select * from cdc.captured_columns
 select * from cdc.change_tables
