@@ -62,7 +62,6 @@ select * from cdc.dbo_mytable_CT
 
 /* 5. Disabling */
 select * from cdc.change_tables
-
 -- disabling a table.
 exec sys.sp_cdc_disable_table @source_schema='SalesLT', @source_name='Customer', @capture_instance='SalesLT_Customer'
 -- disabling for the db.
