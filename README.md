@@ -1,6 +1,7 @@
 # CMF - Cummins
 Repo for scripts & items used by CMF team to migrate to Fabric. 
 
+### Steps
 1. [asqlsdb-cdc-setup.kql](asqlsdb-cdc-setup.sql)
 2. Real-time Hub, setup eventstream.
 3. [sqlcdc-demo.kql](sqlcdc-demo.kql)
@@ -11,8 +12,11 @@ Repo for scripts & items used by CMF team to migrate to Fabric.
 #### Considerations
 - Increase throughput when necessary. [Learn more](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting)
 - Create multiple Eventstreams with subset groups of tables or per single table depending on evenviroment needs.
-- Eventstream transformations such as Manage Fields, Filter and Stream Processing may incur additional CUs.
-- Screenshot above uses Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config.
+- Additional Eventstreams or transformations up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs.
+- Screenshot above uses
+  - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
+  - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config.
+  - Transformations: Done in Eventhouse via step 3, ie. KQL Update Policy and/or Materialized-views.
 
 
 ### Demo CDC
