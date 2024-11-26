@@ -5,6 +5,7 @@ Repo for scripts & items used by CMF team to migrate to Fabric.
 1. [asqlsdb-cdc-setup.kql](asqlsdb-cdc-setup.sql)
 2. Real-time Hub, setup eventstream.
 3. [sqlcdc-demo.kql](sqlcdc-demo.kql)
+4. Try breaking the demo.
 
 
 ### Eventstream
@@ -31,3 +32,19 @@ sqldb-goderich
 ![Demo Instance.png](AzureSQLDatabase-TestInstance-Adventureworks_LT.png "Demo Instance")
 
 ![AllowForFabric.png](AllowForFabric.png "Allow for Fabric")
+
+
+### Try breaking it.
+
+1. Run on sql-goderich
+```
+update SalesLT.Customer set FirstName='Big', LastName='Tuna' where CustomerID=30121
+
+select * from cdc.SalesLT_Customer_CT 
+```
+
+2. Add to the end of [sqlcdc-demo.kql](sqlcdc-demo.kql)
+```
+| where CustomerID == 30121
+| summarize arg_max(CustomerID,*)
+```
