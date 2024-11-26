@@ -38,3 +38,4 @@ sqlcdc_raw
     rowguid=toguid(payload.after.rowguid),
     ModifiedDate=unixtime_milliseconds_todatetime(tolong((payload.after.ModifiedDate)))
 // | where FirstName =='Orlando' or FirstName =='Miami'
+// | count
