@@ -1,0 +1,40 @@
+sqlcdc_raw
+| count 
+
+
+.show ingestion failures 
+
+sqlcdc_raw
+| where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
+| take 10
+
+//mytable
+sqlcdc_raw
+| where payload.source.table == 'mytable'
+| take 10
+| where payload.tableChanges[0].type !='CREATE'
+| project col1=tostring(payload.after.col1), col2=unixtime_milliseconds_todatetime(tolong(payload.after.col2))
+
+
+//SalesLT.Customer
+sqlcdc_raw
+| where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
+// | take 10
+| where payload.tableChanges[0].type !='CREATE'
+| project 
+    CustomerID=tostring(payload.after.CustomerID), 
+    NameStyle=toboolean(payload.after.NameStyle),
+    Title=tostring(payload.after.Title),
+    FirstName=tostring(payload.after.FirstName),
+    MiddleName=tostring(payload.after.MiddleName),
+    LastName=tostring(payload.after.LastName),
+    Suffix=tostring(payload.after.Suffix),
+    CompanyName=tostring(payload.after.CompanyName),
+    SalesPerson=tostring(payload.after.SalesPerson),
+    EmailAddress=tostring(payload.after.EmailAddress),
+    Phone=tostring(payload.after.Phone),
+    PasswordHash=tostring(payload.after.PasswordHash),
+    PasswordSalt=tostring(payload.after.PasswordSalt),
+    rowguid=toguid(payload.after.rowguid),
+    ModifiedDate=unixtime_milliseconds_todatetime(tolong((payload.after.ModifiedDate)))
+// | where FirstName =='Orlando' or FirstName =='Miami'
