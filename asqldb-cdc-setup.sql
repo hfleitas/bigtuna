@@ -35,7 +35,7 @@ select * from SalesLT.Customer where FirstName='Orlando' or FirstName='Miami'
 
 select * from cdc.SalesLT_Customer_CT --one row per change of captured column.
 
-update SalesLT.Customer set FirstName='Miami' where CustomerID=30119
+update SalesLT.Customer set FirstName='Miami' where CustomerID=30120
 
 --changes by the scheduler were successfully detected but we can also scan manually or change the retention.
 exec sys.sp_cdc_scan
@@ -44,8 +44,8 @@ exec sys.sp_cdc_scan
 
 
 /* 4. What about heaps */
-create table mytable (col1 varchar(max), col2 datetime)
-insert into mytable (col1, col2) values ('hello', getutcdate())
+create table mytable (col1 varchar(max), col2 datetime);
+insert into mytable (col1, col2) values ('hello', getutcdate());
 exec sys.sp_cdc_enable_table --must be enabled on the db first!
     @source_schema = 'dbo',
     @source_name = 'mytable',
