@@ -66,3 +66,6 @@ select * from cdc.change_tables
 exec sys.sp_cdc_disable_table @source_schema='SalesLT', @source_name='Customer', @capture_instance='SalesLT_Customer'
 -- disabling for the db.
 exec sys.sp_cdc_disable_db --system and cdc tables gone!
+
+
+/* CDC DEMO - FINISHED */
