@@ -49,4 +49,5 @@ select * from cdc.SalesLT_Customer_CT
 | summarize arg_max(CustomerID,*)
 ```
 
-![bluefin tuna](https://en.wikipedia.org/wiki/Atlantic_bluefin_tuna#/media/File:Large_bluefin_tuna_on_deck.jpg "bluefin tuna")
+## Thank you!
+![bluefin tuna](https://upload.wikimedia.org/wikipedia/commons/7/72/Large_bluefin_tuna_on_deck.jpg "bluefin tuna")
