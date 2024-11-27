@@ -46,7 +46,7 @@ sqldb-goderich
 Using Fabric RTI, run [sqlcdc-demo.kql](sqlcdc-demo.kql) in a KQL Queryset for the Eventhouse KQL Database set as the destination of the Eventstream.
 
 
-## 4. Try breaking it 🎣
+## 4. Try breaking it! 🐟
 
 1. Run on the demo Azure SQL Database. 
 ```
@@ -61,5 +61,5 @@ select * from cdc.SalesLT_Customer_CT;
 | summarize arg_max(CustomerID,*)
 ```
 
-## Thank you! 🐟
+## Thank you!
 ![bluefin tuna](https://upload.wikimedia.org/wikipedia/commons/7/72/Large_bluefin_tuna_on_deck.jpg "bluefin tuna")
