@@ -25,7 +25,7 @@ Database:
 ```
 sqldb-goderich
 ```
-![Demo Instance.png](AzureSQLDatabase-TestInstance-Adventureworks_LT.png "Demo Instance")
+![Demo Server.png](DemoServer.png "Demo Server")
 
 ![AllowForFabric.png](AllowForFabric.png "Allow for Fabric")
 
