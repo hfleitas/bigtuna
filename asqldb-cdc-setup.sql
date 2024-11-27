@@ -29,13 +29,14 @@ select * from cdc.cdc_jobs --returns config of capture jobs.
 
 /* 3. DML change */
 insert into SalesLT.Customer (NameStyle,FirstName,LastName,PasswordHash,PasswordSalt,rowguid,ModifiedDate)
-values (0, 'Orlando', 'Gee', 'L/Rlwxzp4w7RWmEgXX+/A7cXaePEPcp+KwQhl2fJL7w=', '1KjXYs4=', newid(), getutcdate());
-
-select * from SalesLT.Customer where FirstName='Orlando' or FirstName='Miami'
+values (0, 'Orlando', 'Gee', 'L/Rlwxzp4w7RWmEgXX+/A7cXaePEPcp+KwQhl2fJL7w=', '1KjXYs4=', newid(), getutcdate())
+go 3
+    
+select top (10) * from SalesLT.Customer where FirstName='Orlando' or FirstName='Miami' order by CustomerID desc
 
 select * from cdc.SalesLT_Customer_CT --one row per change of captured column.
 
-update SalesLT.Customer set FirstName='Miami' where CustomerID=30120
+update SalesLT.Customer set FirstName='Big', LastName='Tuna' where CustomerID=30121
 
 --changes by the scheduler were successfully detected but we can also scan manually or change the retention.
 exec sys.sp_cdc_scan
