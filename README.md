@@ -1,13 +1,10 @@
 # Azure SQL Database CDC & Fabric RTI
 Scripts and items to migrate data from Azure SQL Database via CDC (Change Data Capture) connector in Fabric Real-Time Intelligence. 
 
-## Goals 🎯
-- Consolidate multiple sql tables of same schemas, ie. one-per-region, by landing them into a single table in Fabric. Same design can be used for consolidating tables of different schemas. 
-- Scalability.
-- Simplification.
-- Cost-effective & minimal-latency.
+## Goal 
+Consolidate multiple sql tables of same schemas or different, ie. one-per-region, by landing them into a single table in Fabric. 
 
-## Steps 🪜
+## Steps 
 1. Run [asqldb-cdc-setup.sql](asqldb-cdc-setup.sql).
 2. Setup Fabric RTI Eventstream.
 3. Run [sqlcdc-demo.kql](sqlcdc-demo.kql).
@@ -15,7 +12,7 @@ Scripts and items to migrate data from Azure SQL Database via CDC (Change Data C
 
 
 ## 1. Demo CDC ✏️ 
-Using SSMS or Azure Data Studio, run [asqlsdb-cdc-setup.sql](asqlsdb-cdc-setup.sql) on the demo Azure SQL Database. 
+In Azure Data Studio connect to the demo Azure SQL Database server and run [asqlsdb-cdc-setup.sql](asqlsdb-cdc-setup.sql). 
 
 Server: 
 ```
@@ -32,10 +29,10 @@ sqldb-goderich
 
 ## 2. Eventstream ⚡
 ![Eventstream1.png](Eventstream1.png "Eventstream1")
-### Considerations
-- Increase throughput when necessary. [Learn more](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting)
-- Create multiple Eventstreams with subset groups of tables or per single table depending on evenviroment needs.
-- Additional Eventstreams or transformations up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs.
+### Production Considerations
+- Increase the eventstream throughput if necessary. [Learn more](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting)
+- Create multiple Eventstreams with a subset or groups of tables (ie. 10:1), or create a single Eventstream per table depending on your evenviroment needs (1:1).
+- Additional Eventstreams or transformations done up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs but allow the ability to take action over the data  in the stream by using Fabric Data Activator (Reflex).
 - Screenshot above uses
   - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
   - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config.
