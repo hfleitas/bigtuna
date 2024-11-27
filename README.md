@@ -1,7 +1,7 @@
 # Azure SQL Database CDC & Fabric RTI
 Scripts and items to migrate data from Azure SQL Database via CDC (Change Data Capture) connector in Fabric Real-Time Intelligence. 
 
-### Goals 🎯
+## Goals 🎯
 - Consolidate multiple sql tables of same schemas, ie. one-per-region, by landing them into a single table in Fabric. Same design can be used for consolidating tables of different schemas. 
 - Scalability.
 - Simplification.
