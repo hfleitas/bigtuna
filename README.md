@@ -1,4 +1,4 @@
-# Fabric RTI - Azure SQL Database
+# Azure SQL Database CDC & Fabric RTI
 Scripts and items to migrate data from Azure SQL Database via CDC (Change Data Capture) connector in Fabric Real-Time Intelligence. 
 
 ### Goals 🎯
