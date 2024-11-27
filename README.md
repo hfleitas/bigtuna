@@ -2,7 +2,7 @@
 Scripts and items to migrate data from Azure SQL Database via CDC (Change Data Capture) connector in Fabric Real-Time Intelligence. 
 
 ### Goals 🎯
-- Consolidate multiple sql tables with same schema, one-per-region, into a single table in Fabric. Same design can be used for consolidating tables of different schemas. 
+- Consolidate multiple sql tables with same schema, one-per-region, by landing in a single table in Fabric. Same design can be used for consolidating tables of different schemas. 
 - Scalability.
 - Simplification.
 - Cost-effective & minimal-latency.
