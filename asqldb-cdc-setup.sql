@@ -36,7 +36,7 @@ select top (10) * from SalesLT.Customer where FirstName='Orlando' or FirstName='
 
 select * from cdc.SalesLT_Customer_CT --one row per change of captured column.
 
-update SalesLT.Customer set FirstName='Big', LastName='Tuna' where CustomerID=30121
+update SalesLT.Customer set FirstName='Miami' where CustomerID=30121
 
 --changes by the scheduler were successfully detected but we can also scan manually or change the retention.
 exec sys.sp_cdc_scan
