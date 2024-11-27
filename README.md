@@ -8,7 +8,7 @@ Scripts and items to migrate data from Azure SQL Database via CDC (Change Data C
 - Cost-effective & minimal-latency.
 
 ## Steps 🪜
-1. Run [asqlsdb-cdc-setup.sql](asqlsdb-cdc-setup.sql).
+1. Run [asqldb-cdc-setup.sql](asqldb-cdc-setup.sql).
 2. Setup Fabric RTI Eventstream.
 3. Run [sqlcdc-demo.kql](sqlcdc-demo.kql).
 4. Try breaking the demo.
