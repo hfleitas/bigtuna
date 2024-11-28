@@ -28,7 +28,7 @@ Database:
 ![AllowAzureNetwork.png](AllowAzureNetwork.png "Allow Azure Network(Fabric)")
 
 ### Eventstream ⚡
-![Eventstream1.png](Eventstream1.png "Eventstream1")
+![Eventstream.png](Eventstream.png "Eventstream")
 - Increase the eventstream throughput if necessary. [Learn more](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting)
 - Create multiple Eventstreams with a subset or groups of tables (ie. 10:1), or create a single Eventstream per table depending on your evenviroment needs (1:1).
 - Additional Eventstreams or transformations done up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs but allow the ability to take action over the data  in the stream by using Fabric Data Activator (Reflex).
