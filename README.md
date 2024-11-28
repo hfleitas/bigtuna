@@ -1,11 +1,11 @@
-# Azure SQL Database CDC & Fabric RTI
+# Fabric RTI (Azure SQL Database CDC)
 Scripts and items to migrate data from Azure SQL Database via CDC (Change Data Capture) connector in Fabric Real-Time Intelligence. 
 
 ## Goal 
 Consolidate multiple sql tables of same schemas or different, ie. one-per-region, by landing them into a single table in Fabric. 
 
 ## Steps 
-1. Run [asqldb-cdc-setup.sql](asqldb-cdc-setup.sql).
+1. Run [EnableCDC_DML.sql](EnableCDC_DML.sql)
 2. Setup Fabric RTI Eventstream.
 3. Run [sqlcdc-demo.kql](sqlcdc-demo.kql).
 4. Try breaking the demo.
