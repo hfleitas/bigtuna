@@ -13,7 +13,7 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 4. Run [Transformations.kql](Transformations.kql)
 
 
-### Eventstream ⚡
+### Step Eventstream Details⚡
 1. Notice you can specificy the workspace and name the eventstream item.
 2. Set the datasource connection and tables you'd like to capture.
 
@@ -31,7 +31,6 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 
 ![EventstreamDestinationMapping.png](assets/EventstreamDestinationMapping.png "Table Mapping")
 
-
 Screenshot above uses:
 - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
 - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config. Alternatively, choose Event processing before ingestion for Streaming ingestion.
@@ -42,6 +41,9 @@ Screenshot above uses:
 - Regarding when to flatten or split the data, the proper approach is related to the business purpose wanted to achieve. If undecided to be split into different tables, then just sink to keep the original data without need to process inside Eventstream.
 - Additional Eventstreams or transformations done up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs but allow the ability to take action over the data  in the stream by using Fabric Data Activator (Reflex).
 
+## Proceed with remaining Steps.
+3. Run [DMLChanges.sql](DMLChanges.sql)
+4. Run [Transformations.kql](Transformations.kql)
 
 ## Thank you!
 ![bluefin tuna](https://upload.wikimedia.org/wikipedia/commons/7/72/Large_bluefin_tuna_on_deck.jpg "bluefin tuna")
