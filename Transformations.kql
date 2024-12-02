@@ -1,6 +1,9 @@
 sqlcdc_raw
 | count 
 
+sqlcdc_raw
+| where payload has_any ('Customer','mytable') 
+| summarize count() by tostring(payload.source.table), tostring(payload.tableChanges[0].type)
 
 .show ingestion failures 
 
