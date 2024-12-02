@@ -23,9 +23,8 @@ Database:
 ```
 sqlcdc-fabric
 ```
-![Creds.png](Creds.png "Creds")
 
-![AllowAzureNetwork.png](AllowAzureNetwork.png "Allow Azure Network(Fabric)")
+![AllowAzureNetwork.png](assets/AllowAzureNetwork.png "Allow Azure Network(Fabric)")
 
 ### Eventstream ⚡
 ![Eventstream.png](Eventstream.png "Eventstream")
