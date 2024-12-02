@@ -24,6 +24,14 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
    
 ![EventstreamDestination.png](assets/EventstreamDestination.png "Eventstream Desination")
 
+6. The eventhouse and workspace must be created prior to this step.
+7. Configure new or existing destination table, set advanced filter to look back from the eventstream starting point, and table mapping.
+
+![EventstreamDestinationConfigure.png](assets/EventstreamDestinationConfigure.png "Eventstream Destination Configure")
+
+![EventstreamDestinationMapping.png](assets/EventstreamDestinationMapping.png "Table Mapping")
+
+
 Screenshot above uses:
 - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
 - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config. Alternatively, choose Event processing before ingestion for Streaming ingestion.
