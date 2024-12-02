@@ -17,11 +17,11 @@ In Azure Data Studio connect to the demo Azure SQL Database server to run sql sc
 
 Server: 
 ```
-
+sqlcdc-fabric.database.windows.net
 ```
 Database: 
 ```
-
+sqlcdc-fabric
 ```
 ![Creds.png](Creds.png "Creds")
 
