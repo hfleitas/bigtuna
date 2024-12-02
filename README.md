@@ -24,10 +24,10 @@ Database:
 sqlcdc-fabric
 ```
 
-![AllowAzureNetwork.png](assets/AllowAzureNetwork.png "Allow Azure Network(Fabric)")
+![AllowAzureNetwork.png](assets/AllowForFabric.png "Allow Azure Network(Fabric)")
 
 ### Eventstream ⚡
-![Eventstream.png](Eventstream.png "Eventstream")
+![Eventstream1.png](assets/Eventstream1.png "Eventstream Connect Datasource")
 - Increase the eventstream throughput if necessary. [Learn more](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting)
 - Create multiple Eventstreams with a subset or groups of tables (ie. 10:1), or create a single Eventstream per table depending on your evenviroment needs (1:1).
 - Additional Eventstreams or transformations done up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs but allow the ability to take action over the data  in the stream by using Fabric Data Activator (Reflex).
