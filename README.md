@@ -24,7 +24,7 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
    
 ![EventstreamDestination.png](assets/EventstreamDestination.png "Eventstream Desination")
 
-6. The eventhouse and workspace must be created prior to this step.
+6. The eventhouse and workspace must be created prior to this step. Click Save & Publish. 
 7. Configure new or existing destination table, set advanced filter to look back from the eventstream starting point, and table mapping.
 
 ![EventstreamDestinationConfigure.png](assets/EventstreamDestinationConfigure.png "Eventstream Destination Configure")
