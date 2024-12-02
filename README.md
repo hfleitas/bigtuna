@@ -11,30 +11,21 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 4. Run [Transformations.kql](Transformations.kql)
 
 
-## Reference
-###  Demo CDC ✏️ 
-In Azure Data Studio connect to the demo Azure SQL Database server to run sql scripts.
-
-Server: 
-```
-sqlcdc-fabric.database.windows.net
-```
-Database: 
-```
-sqlcdc-fabric
-```
-
-![AllowAzureNetwork.png](assets/AllowForFabric.png "Allow Azure Network(Fabric)")
-
 ### Eventstream ⚡
-![Eventstream1.png](assets/Eventstream1.png "Eventstream Connect Datasource")
-- Increase the eventstream throughput if necessary. [Learn more](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting)
-- Create multiple Eventstreams with a subset or groups of tables (ie. 10:1), or create a single Eventstream per table depending on your evenviroment needs (1:1).
+1. Notice you can specificy the workspace and name the eventstream item.
+   - ![EventstreamConnectSource.png](assets/EventstreamConnectSource.png "Eventstream Connect Datasource")
+3. Scroll down to click Next, Connect and Open Eventstream.
+4. Add the destination (ie. Eventhouse, Lakehouse or Reflex). Here we'll cover eventhouse for minimal-latency and because the cdc stream is time-bound, but this may vary based on business needs and workload.
+   - ![EventstreamDestination.png](assets/EventstreamDestination.png "Eventstream Desination")
+   - Screenshot above uses:
+     - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
+     - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config.
+     - Transformations: Done in Eventhouse via step 3, ie. KQL Update Policy and/or Materialized-views.
+
+### Event Recommendations
+- Normally the CDC data doesn't have high [throughput](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting), getting all tables' cdc into one Eventstream should be OK. 
+- Regarding when to flatten or split the data, the proper approach is related to the business purpose wanted to achieve. If undecided to be split into different tables, then just sink to keep the original data without need to process inside Eventstream.
 - Additional Eventstreams or transformations done up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs but allow the ability to take action over the data  in the stream by using Fabric Data Activator (Reflex).
-- Screenshot above uses
-  - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
-  - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config.
-  - Transformations: Done in Eventhouse via step 3, ie. KQL Update Policy and/or Materialized-views.
 
 
 ## Thank you!
