@@ -1,7 +1,7 @@
 # Fabric RTI (Azure SQL Database CDC)
 Scripts and items to migrate data from Azure SQL Database via CDC (Change Data Capture) connector in Fabric Real-Time Intelligence. 
 
-This tutorial uses Azure SQL Database, AdventureWorks_LT sample.
+Here we'll use the AdventureWorks_LT database sample in Azure SQL Database service.
 
 ## Goal 
 Consolidate multiple sql tables of same schemas or different, ie. one-per-region, by landing them into a single table in Fabric. 
@@ -15,19 +15,19 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 
 ### Eventstream ⚡
 1. Notice you can specificy the workspace and name the eventstream item.
-2. Configure 
-   
+2. Set the datasource connection and tables you'd like to capture.
+
 ![EventstreamConnectSource.png](assets/EventstreamConnectSource.png "Eventstream Connect Datasource")
 
-3. Scroll down to click Next, Connect and Open Eventstream.
-4. Add the destination (ie. Eventhouse, Lakehouse or Reflex). Here we'll cover eventhouse for minimal-latency and because the cdc stream is time-bound, but this may vary based on business needs and workload.
+4. Scroll down to click Next, Connect and Open Eventstream.
+5. Add the destination (ie. Eventhouse, Lakehouse or Reflex). Here we'll cover eventhouse for minimal-latency and because the cdc stream is time-bound, but this may vary based on business needs and workload.
    
 ![EventstreamDestination.png](assets/EventstreamDestination.png "Eventstream Desination")
 
 Screenshot above uses:
 - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
-- Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config.
-- Transformations: Done in Eventhouse via step 3, ie. KQL Update Policy and/or Materialized-views.
+- Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config. Alternatively, choose Event processing before ingestion for Streaming ingestion.
+- Transformations: Done in Eventhouse via [step 4](Transformations.kql), ie. [Update Policy](https://learn.microsoft.com/fabric/real-time-intelligence/table-update-policy) and/or [Materialized-views](https://learn.microsoft.com/fabric/real-time-intelligence/materialized-view).
 
 ### Event Recommendations
 - Normally the CDC data doesn't have high [throughput](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting), getting all tables' cdc into one Eventstream should be OK. 
