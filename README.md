@@ -6,6 +6,19 @@ Here we'll use the AdventureWorks_LT database sample in Azure SQL Database servi
 ## Goal 
 Consolidate multiple sql tables of same schemas or different, ie. one-per-region, by landing them into a single table in Fabric. 
 
+Here is a simple flow chart:
+
+```mermaid
+graph LR;
+dbo.mytable-->eventstream;
+SalesLT.Customers-->eventstream;
+etc-->eventstream;
+eventstream-->eventhouse;
+eventhouse-->cdc_raw;
+cdc_raw-->|function1| mytable;
+cdc_raw-->|function2| Customers;
+```
+
 ## Steps 
 1. Run [EnableCDC.sql](EnableCDC.sql). 
 2. Setup Fabric RTI Eventstream.
