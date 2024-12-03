@@ -4,7 +4,7 @@ Scripts and items to migrate data from Azure SQL Database via CDC (Change Data C
 Here we'll use the AdventureWorksLT database sample in Azure SQL Database service.
 
 ## Goal 
-Consolidate multiple sql tables of same schemas (columns, etc) or different, and landing them into a single table in Fabric. 
+Migrate multiple tables of same schemas (columns, etc) or different by landing them into a single table in Fabric. 
 
 ```mermaid
 graph LR
