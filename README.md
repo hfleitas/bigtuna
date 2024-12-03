@@ -43,7 +43,7 @@ Screenshot above uses:
 
 ## Proceed with remaining Steps.
 3. Run [DMLChanges.sql](DMLChanges.sql)
-4. Run [Transformations.kql](Transformations.kql)
+4. Run [Queryset.kql](Queryset.kql)
 
 ## Thank you!
 ![bluefin tuna](https://upload.wikimedia.org/wikipedia/commons/7/72/Large_bluefin_tuna_on_deck.jpg "bluefin tuna")
