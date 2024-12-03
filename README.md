@@ -43,7 +43,9 @@ graph LR
 Screenshot above uses:
 - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
 - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config. Alternatively, choose Event processing before ingestion for Streaming ingestion and deactivate & activate the destination to set an Event start time from when the stream was last stopped or custom datetime.
+  
 ![EventstreamResumeCustomTime.png](assets/EventstreamResumeCustomTime.png "Event processing resumed")
+
 - Transformations: Done in Eventhouse via [step 4](Queryset.kql), ie. [Update Policy](https://learn.microsoft.com/fabric/real-time-intelligence/table-update-policy) and/or [Materialized-views](https://learn.microsoft.com/fabric/real-time-intelligence/materialized-view).
 
 ### Recommendations
