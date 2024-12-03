@@ -10,7 +10,7 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 1. Run [EnableCDC.sql](EnableCDC.sql). 
 2. Setup Fabric RTI Eventstream.
 3. Run [DMLChanges.sql](DMLChanges.sql)
-4. Run [Transformations.kql](Transformations.kql)
+4. Run [Queryset.kql](Queryset.kql)
 
 
 ### Step Eventstream Details⚡
@@ -34,7 +34,7 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 Screenshot above uses:
 - Source: 2 tables of different schemas and volumes. One with a Clustered Primary Key and the other table is a heap without any indexes.
 - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config. Alternatively, choose Event processing before ingestion for Streaming ingestion.
-- Transformations: Done in Eventhouse via [step 4](Transformations.kql), ie. [Update Policy](https://learn.microsoft.com/fabric/real-time-intelligence/table-update-policy) and/or [Materialized-views](https://learn.microsoft.com/fabric/real-time-intelligence/materialized-view).
+- Transformations: Done in Eventhouse via [step 4](Queryset.kql), ie. [Update Policy](https://learn.microsoft.com/fabric/real-time-intelligence/table-update-policy) and/or [Materialized-views](https://learn.microsoft.com/fabric/real-time-intelligence/materialized-view).
 
 ### Recommendations
 - Normally the CDC data doesn't have high [throughput](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting), getting all tables' cdc into one Eventstream should be OK. 
