@@ -1,0 +1,93 @@
+// 1. Basic Queries //
+sqlcdc_raw
+| count
+
+sqlcdc_raw
+| where payload has_any ('Customer','mytable')
+| summarize count() by tostring(payload.source.table), tostring(payload.tableChanges[0].type)
+
+sqlcdc_raw
+| where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
+| take 10
+
+sqlcdc_raw
+| where payload.source.table == 'mytable' and payload.source.schema=='dbo'
+| take 10
+
+.show ingestion failures 
+
+.show database policy ingestionbatching
+
+.show cluster
+
+
+
+// 2. Transformations for Function in Table Update Policies //
+
+//mytable
+sqlcdc_raw
+| where payload.source.table == 'mytable' and payload.source.schema=='dbo'
+| take 10
+| where payload.tableChanges[0].type !='CREATE'
+| project col1=tostring(payload.after.col1), col2=unixtime_milliseconds_todatetime(tolong(payload.after.col2))
+
+//SalesLT.Customer
+sqlcdc_raw
+| where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
+// | take 10
+| where payload.tableChanges[0].type !='CREATE' 
+// | top 10 by CustomerID=toint(payload.after.CustomerID) desc 
+// | where payload has_any ('30121','30120')
+// | extend ingestion_time(), operation=tostring(payload.op)
+// | where payload.op == 'd'
+| project
+    //payload.op, 
+    CustomerID=toint(payload.after.CustomerID), 
+    NameStyle=toboolean(payload.after.NameStyle),
+    Title=tostring(payload.after.Title),
+    FirstName=tostring(payload.after.FirstName),
+    MiddleName=tostring(payload.after.MiddleName),
+    LastName=tostring(payload.after.LastName),
+    Suffix=tostring(payload.after.Suffix),
+    CompanyName=tostring(payload.after.CompanyName),
+    SalesPerson=tostring(payload.after.SalesPerson),
+    EmailAddress=tostring(payload.after.EmailAddress),
+    Phone=tostring(payload.after.Phone),
+    PasswordHash=tostring(payload.after.PasswordHash),
+    PasswordSalt=tostring(payload.after.PasswordSalt),
+    rowguid=toguid(payload.after.rowguid),
+    ModifiedDate=unixtime_milliseconds_todatetime(tolong((payload.after.ModifiedDate)))
+| where CustomerID >= 30119
+// | where FirstName =='Orlando' or FirstName =='Miami'
+// | count
+// | top 10 by CustomerID desc 
+// | where CustomerID == 30121
+// | summarize arg_max(CustomerID,*) by ingestion_time()
+| summarize arg_max(ingestion_time(),*) by CustomerID
+// | where CustomerID in (30121,30120)
+
+
+//what about deletes?
+sqlcdc_raw
+| where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
+| where payload.tableChanges[0].type !='CREATE' 
+| extend ingestion_time(), operation=tostring(payload.op), debeziumTS=unixtime_milliseconds_todatetime(tolong(payload.ts_ms)), sourceTS=unixtime_milliseconds_todatetime(tolong(payload.source.ts_ms))
+| extend DebeziumLag=debeziumTS-sourceTS
+// | extend CustomerID=toint(payload.before.CustomerID)
+// | where CustomerID in (30121,30120)
+| where payload has_any ('30120','30121')
+// | summarize arg_max(debeziumTS,*) by payload.before.CustomerID
+// | summarize arg_max(CustomerID,operation) by CustomerID
+// if the last operations is d, then can use where Customer_ID not in (...)
+
+
+// FINISH - Reset demo //
+//.set sqlcdc_raw1 <| sqlcdc_raw
+
+//.clear table sqlcdc_raw data
+
+.drop table sqlcdc_raw ifexists
+
+//go delete the eventstream item for the workspace & the eventhouse
+
+.drop table sqlcdc_raw ifexists
