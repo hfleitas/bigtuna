@@ -2,8 +2,18 @@
 -- This sample uses AdventureWorks_LT.
 
 
-/* 1. enable cdc on database */
+/* 1. enable cdc on database & tables*/
 exec sys.sp_cdc_enable_db --system tables created along cdc schema
+go
+exec sys.sp_cdc_enable_table
+    @source_schema = 'SalesLT',
+    @source_name = 'Customer',
+    @role_name=NULL --control access to change data.
+go
+exec sys.sp_cdc_enable_table 
+    @source_schema = 'dbo',
+    @source_name = 'mytable',
+    @role_name=NULL
 go
 
 select name, is_cdc_enabled from sys.databases
