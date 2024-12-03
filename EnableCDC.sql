@@ -1,5 +1,5 @@
 -- ref: https://learn.microsoft.com/en-us/azure/azure-sql/database/change-data-capture-overview?view=azuresql
--- This sample uses AdventureWorks_LT.
+-- This sample uses AdventureWorksLT.
 
 
 /* 1. enable cdc on database & tables*/
