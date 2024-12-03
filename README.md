@@ -4,7 +4,7 @@ Scripts and items to migrate data from Azure SQL Database via CDC (Change Data C
 Here we'll use the AdventureWorksLT database sample in Azure SQL Database service.
 
 ## Goal 
-With minimal-latency, migrate multiple tables of same schemas (columns, etc) or varying schemas by landing them into a single table in Fabric. 
+With minimal-latency, migrate multiple tables of same or varying schemas (columns, etc) by landing them into a single table in Fabric. 
 
 ```mermaid
 graph LR
