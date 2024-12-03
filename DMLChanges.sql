@@ -26,6 +26,7 @@ go
 delete top (1) from mytable where col1 = 'hello'
 go
 
+
 /* FINISHED */
 exec sys.sp_cdc_disable_db
 go
