@@ -31,4 +31,6 @@ exec sys.sp_cdc_disable_db
 go
 delete from SalesLT.Customer where CustomerID>=30119
 go 
+drop table dbo.mytable
+go 
 DBCC CHECKIDENT('SalesLT.Customer',RESEED, 30119) 
