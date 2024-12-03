@@ -6,17 +6,13 @@ Here we'll use the AdventureWorks_LT database sample in Azure SQL Database servi
 ## Goal 
 Consolidate multiple sql tables of same schemas or different, ie. one-per-region, by landing them into a single table in Fabric. 
 
-Here is a simple flow chart:
-
 ```mermaid
-graph LR;
-dbo.mytable-->eventstream;
-SalesLT.Customers-->eventstream;
-etc-->eventstream;
-eventstream-->eventhouse;
-eventhouse-->cdc_raw;
-cdc_raw-->|function1| mytable;
-cdc_raw-->|function2| Customers;
+graph LR
+   dbo.mytable1-->es
+   dbo.mytable2-->es
+   dbo.mytable3-->es
+   es{eventstream}-->cdc_raw
+   cdc_raw-->|fn_mytable| mytable
 ```
 
 ## Steps 
