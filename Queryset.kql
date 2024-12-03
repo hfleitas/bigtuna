@@ -88,6 +88,4 @@ sqlcdc_raw
 
 .drop table sqlcdc_raw ifexists
 
-//go delete the eventstream item from the workspace & the delete the eventhouse.
-
-.drop table sqlcdc_raw ifexists
+//if needed, delete the eventstream item from the workspace & the delete the eventhouse.
