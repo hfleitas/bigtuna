@@ -81,13 +81,13 @@ sqlcdc_raw
 // if the last operations is d, then can use where Customer_ID not in (...)
 
 
-// FINISH - Reset demo //
+// 3. FINISH - Reset demo //
 //.set sqlcdc_raw1 <| sqlcdc_raw
 
 //.clear table sqlcdc_raw data
 
 .drop table sqlcdc_raw ifexists
 
-//go delete the eventstream item for the workspace & the eventhouse
+//go delete the eventstream item from the workspace & the delete the eventhouse.
 
 .drop table sqlcdc_raw ifexists
