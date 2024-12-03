@@ -77,8 +77,38 @@ sqlcdc_raw
 // | where CustomerID in (30121,30120)
 | where payload has_any ('30120','30121')
 // | summarize arg_max(debeziumTS,*) by payload.before.CustomerID
+
 // | summarize arg_max(CustomerID,operation) by CustomerID
 // if the last operations is d, then can use where Customer_ID not in (...)
+
+let deleted=sqlcdc_raw
+| where payload.op=='d' and isnull(payload.after)
+| extend debeziumTS=unixtime_milliseconds_todatetime(tolong(payload.ts_ms)), sourceTS=unixtime_milliseconds_todatetime(tolong(payload.source.ts_ms))
+| summarize arg_max(ingestion_time(),*) by CustomerID=toint(payload.before.CustomerID)
+;
+// deleted
+sqlcdc_raw
+| where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
+| where payload.tableChanges[0].type !='CREATE' 
+| project
+    CustomerID=toint(payload.after.CustomerID), 
+    NameStyle=toboolean(payload.after.NameStyle),
+    Title=tostring(payload.after.Title),
+    FirstName=tostring(payload.after.FirstName),
+    MiddleName=tostring(payload.after.MiddleName),
+    LastName=tostring(payload.after.LastName),
+    Suffix=tostring(payload.after.Suffix),
+    CompanyName=tostring(payload.after.CompanyName),
+    SalesPerson=tostring(payload.after.SalesPerson),
+    EmailAddress=tostring(payload.after.EmailAddress),
+    Phone=tostring(payload.after.Phone),
+    PasswordHash=tostring(payload.after.PasswordHash),
+    PasswordSalt=tostring(payload.after.PasswordSalt),
+    rowguid=toguid(payload.after.rowguid),
+    ModifiedDate=unixtime_milliseconds_todatetime(tolong((payload.after.ModifiedDate)))
+| where CustomerID !in ( deleted )
+| summarize arg_max(ingestion_time(),*) by CustomerID
+
 
 
 // 3. FINISH - Reset demo //
