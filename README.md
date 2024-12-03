@@ -25,7 +25,7 @@ Consolidate multiple sql tables of same schemas or different, ie. one-per-region
 ![EventstreamDestination.png](assets/EventstreamDestination.png "Eventstream Desination")
 
 6. The eventhouse and workspace must be created prior to this step. Click Save & Publish. 
-7. Configure new or existing destination table, set advanced filter to look back from the eventstream starting point, and table mapping.
+7. Configure new or existing destination table, set Event retrival start date to time just before creating the Eventstream, set table mapping and click Finish.
 
 ![EventstreamDestinationConfigure.png](assets/EventstreamDestinationConfigure.png "Eventstream Destination Configure")
 
@@ -36,7 +36,7 @@ Screenshot above uses:
 - Destination: Direct Ingestion to Eventhouse, which means Eventhouse uses pull method from Eventstream via table batching policy config. Alternatively, choose Event processing before ingestion for Streaming ingestion.
 - Transformations: Done in Eventhouse via [step 4](Transformations.kql), ie. [Update Policy](https://learn.microsoft.com/fabric/real-time-intelligence/table-update-policy) and/or [Materialized-views](https://learn.microsoft.com/fabric/real-time-intelligence/materialized-view).
 
-### Event Recommendations
+### Recommendations
 - Normally the CDC data doesn't have high [throughput](https://learn.microsoft.com/fabric/real-time-intelligence/event-streams/configure-settings#event-throughput-setting), getting all tables' cdc into one Eventstream should be OK. 
 - Regarding when to flatten or split the data, the proper approach is related to the business purpose wanted to achieve. If undecided to be split into different tables, then just sink to keep the original data without need to process inside Eventstream.
 - Additional Eventstreams or transformations done up-stream such as Manage Fields, Filter and Stream Processing may incur additional CUs but allow the ability to take action over the data  in the stream by using Fabric Data Activator (Reflex).
