@@ -106,7 +106,7 @@ sqlcdc_raw
     PasswordSalt=tostring(payload.after.PasswordSalt),
     rowguid=toguid(payload.after.rowguid),
     ModifiedDate=unixtime_milliseconds_todatetime(tolong((payload.after.ModifiedDate)))
-| where CustomerID !in ( deleted )
+| where CustomerID !in ( deleted ) //unless the same CustomerID got re-inserted recently, then we would compare sourceTS for the deleted vs the recently insert and keep it if newer. 
 | summarize arg_max(ingestion_time(),*) by CustomerID
 
 
