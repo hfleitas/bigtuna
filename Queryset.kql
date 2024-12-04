@@ -71,7 +71,7 @@ sqlcdc_raw
 sqlcdc_raw
 | where payload.source.table == 'Customer' and payload.source.schema=='SalesLT'
 | where payload.tableChanges[0].type !='CREATE' 
-| extend ingestion_time(), operation=tostring(payload.op), debeziumTS=unixtime_milliseconds_todatetime(tolong(payload.ts_ms)), sourceTS=unixtime_milliseconds_todatetime(tolong(payload.source.ts_ms))
+| extend ingestion_time(), operation=tostring(payload.op), debeziumTS=unixtime_milliseconds_todatetime(tolong(payload.ts_ms)), sourceTS=unixtime_milliseconds_todatetime(tolong(payload.source.ts_ms)) //https://debezium.io/documentation/reference/stable/connectors/sqlserver.html
 | extend DebeziumLag=debeziumTS-sourceTS
 // | extend CustomerID=toint(payload.before.CustomerID)
 // | where CustomerID in (30121,30120)
