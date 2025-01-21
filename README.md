@@ -8,10 +8,10 @@ With minimal-latency, migrate multiple tables of same or varying schemas (column
 
 ```mermaid
 graph LR
-   dbo.mytable1-->es
-   dbo.mytable2-->es
-   dbo.mytable3-->es
-   dbo.mytable4-->es
+   rgn1.mytable-->es
+   rgn2.mytable-->es
+   rgn3.mytable-->es
+   rgn4.mytable-->es
    es{eventstream}-->cdc_raw
    cdc_raw-->|fn_mytable | mytable
    cdc_raw-->|fn_mytable_del | mytable_del
