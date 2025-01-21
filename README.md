@@ -12,7 +12,10 @@ graph LR
    dbo.mytable2-->es
    dbo.mytable3-->es
    es{eventstream}-->cdc_raw
-   cdc_raw-->|fn_mytable| mytable
+   cdc_raw-->|fn_mytable | mytable
+   cdc_raw-->|fn_mytable_del | mytable_del
+   mytable -->|mv_creates | fn_mytable_vw
+   mytable_del -->|mv_deletes | fn_mytable_vw
 ```
 
 ## Steps 
