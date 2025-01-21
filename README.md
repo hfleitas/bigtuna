@@ -11,6 +11,7 @@ graph LR
    dbo.mytable1-->es
    dbo.mytable2-->es
    dbo.mytable3-->es
+   dbo.mytable4-->es
    es{eventstream}-->cdc_raw
    cdc_raw-->|fn_mytable | mytable
    cdc_raw-->|fn_mytable_del | mytable_del
