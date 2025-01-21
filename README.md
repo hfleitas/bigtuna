@@ -12,9 +12,9 @@ graph LR
    rgn2.mytable-->es
    rgn3.mytable-->es
    rgn4.mytable-->es
-   es{eventstream}-->cdc_raw
-   cdc_raw-->|fn_mytable | mytable
-   cdc_raw-->|fn_mytable_del | mytable_del
+   es{eventstream}-->mytable_cdc_raw
+   mytable_cdc_raw-->|fn_mytable | mytable
+   mytable_cdc_raw-->|fn_mytable_del | mytable_del
    mytable -->|mv_creates | fn_mytable_vw
    mytable_del -->|mv_deletes | fn_mytable_vw
 ```
