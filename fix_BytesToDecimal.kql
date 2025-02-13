@@ -1,0 +1,32 @@
+let few_records=datatable (
+    payload_discount:string, original_discount:decimal, //numeric(7, 4)
+    payload_rate:string, original_rate:decimal, //numeric(9, 6)
+    payload_labor:string, original_labor:decimal, //numeric(5, 2)
+    payload_code:string, orginal_code:decimal //numeric(10, 0)
+)[
+"AQ==", 0.0001, "D0JA", 1.000000,"Sa4=",188.62,"AS1c",77148
+];
+few_records
+| extend 
+    decoded_discount = iif(isnotnull(payload_discount), base64_decode_toarray(tostring(payload_discount)), dynamic(null)),
+    decoded_rate = iif(isnotnull(payload_rate), base64_decode_toarray(tostring(payload_rate)), dynamic(null)),
+    decoded_labor = iif(isnotnull(payload_labor), base64_decode_toarray(tostring(payload_labor)), dynamic(null)),
+    decoded_code = iif(isnotnull(payload_code), base64_decode_toarray(tostring(payload_code)), dynamic(null))
+| mv-apply 
+    array_discount = decoded_discount to typeof(int),
+    array_rate = decoded_rate to typeof(int),
+    array_labor = decoded_labor to typeof(int),
+    array_code = decoded_code to typeof(int) 
+    on (
+        summarize   sum_discount = sum(array_discount * pow(256, (array_length(decoded_discount) - 1) - row_number() + 1)) / pow(10,4), //percision 4
+                    sum_rate = sum(array_rate * pow(256, (array_length(decoded_rate) - 1) - row_number() + 1)) / pow(10,6),             //percision 6
+                    sum_labor = sum(array_labor * pow(256, (array_length(decoded_labor) - 1) - row_number() + 1)) / pow(10,2),      //percision 2
+                    sum_code = sum(array_code * pow(256, (array_length(decoded_code) - 1) - row_number() + 1)) / pow(10,0)       //percision 0
+    )
+| project 
+    discount = iif(isnotnull(decoded_discount), todecimal(sum_discount), decimal(null)),
+    rate=iif(isnotnull(decoded_rate), todecimal(sum_rate), decimal(null)),
+    labor=iif(isnotnull(decoded_labor), todecimal(sum_labor), decimal(null)),
+    code=iif(isnotnull(decoded_code), todecimal(sum_code), decimal(null))
+// | project discount, original_discount
+// | extend match=(discount==original_discount)
